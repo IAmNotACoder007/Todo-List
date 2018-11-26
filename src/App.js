@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HeaderContainer from './containers/headerContainer';
+import FooterContainer from './containers/footerContainer';
+import TodosContainer from './containers/todosContainer';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 class App extends Component {
   render() {
+    const theme = createMuiTheme({
+      palette: {
+        primary: {
+          light: '#90CAF9',
+          main: '#2196F3',
+          dark: '#1E88E5',
+          contrastText: '#fff',
+        }
+
+      }
+    });
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <HeaderContainer></HeaderContainer>
+          <TodosContainer></TodosContainer>
+          <FooterContainer></FooterContainer>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -35,6 +35,9 @@ class Todos extends Component {
             todoTextError: false,
             todoTextFromDialog: todo,
             dueDate: new Date(date),
+            items: ['Default', ...this.props.listItems.map((item) => {
+                return item.name
+            })]
         }
         let modelDialogProps = {
             stateChanged: (state) => {
@@ -103,7 +106,10 @@ const todosInfo = {
     dueDate: Proptypes.string,
     todoTextFromDialog: Proptypes.string,
     selectedListItem: Proptypes.string,
-
+    listItems: Proptypes.arrayOf(Proptypes.shape({
+        id: Proptypes.string,
+        name: Proptypes.string
+    }))
 }
 
 Todos.proptypes = {

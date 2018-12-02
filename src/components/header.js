@@ -34,12 +34,19 @@ class AppHeader extends Component {
             modelDialogContent: StringArrayEditor,
             openModelDialog: true,
             modelDialogContentProps: {
-                entities: this.getListItems()
+                entities: this.getListItems(),
+                changeState: this.props.stateChange,
+                onDelete: (id) => {
+                    this.props.deleteTodoItem(id);
+                    this.refreshTodoItemDialog = true;
+                }
             },
             modelDialogOkClick: () => {
                 this.props.stateChange({ 'openModelDialog': false })
             },
             stateChange: this.props.stateChange,
+            showCancelButton: false,
+            okButtonName: "Close",
             additionalModelDialogButtons: [
                 {
                     text: "Add Item",
@@ -60,7 +67,14 @@ class AppHeader extends Component {
                         this.props.stateChange({ openStringEditor: true, stringEditorProps: { ...stringEditorProps } });
                     }
                 }
-            ]
+            ],
+            onDialogClose: () => {
+                const state = {
+                    additionalModelDialogButtons: [],
+                    showCancelButton: true,
+                }
+                this.props.stateChange(state);
+            }
         }
         this.props.stateChange(state);
         this.handleClose();
@@ -122,7 +136,8 @@ AppHeader.propTypes = {
     })),
     openStringEditor: PropTypes.bool,
     stringEditorProps: PropTypes.object,
-    addTodoItem: PropTypes.func
+    addTodoItem: PropTypes.func,
+    deleteTodoItem: PropTypes.func
 }
 
 AppHeader.defaultProps = {

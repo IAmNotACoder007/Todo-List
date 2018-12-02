@@ -45,3 +45,10 @@ export const addTodoItem = (item) => {
     }
 }
 
+export const deleteTodoItem = (id) => {
+    return {
+        type: "DELETE_TODO_ITEM",
+        id,
+    }
+}
+

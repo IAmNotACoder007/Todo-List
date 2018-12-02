@@ -24,18 +24,20 @@ class AppFooter extends Component {
         }
     }
 
-    defaultModelProps = {
-        stateChanged: (state) => {
-            this.modelProps = {
-                ...this.modelProps,
-                ...state
-            }
-            this.onChange({ 'modelDialogContentProps': this.modelProps })
-        },
-        ...this.getTodoModelDefaultprops()
+    defaultModelProps() {
+        return {
+            stateChanged: (state) => {
+                this.modelProps = {
+                    ...this.modelProps,
+                    ...state
+                }
+                this.onChange({ 'modelDialogContentProps': this.modelProps })
+            },
+            ...this.getTodoModelDefaultprops()
+        }
     }
 
-    modelProps = this.defaultModelProps
+    modelProps = this.defaultModelProps();
 
     footerStyle = {
         display: 'flex',
@@ -45,7 +47,7 @@ class AppFooter extends Component {
 
     closeTodoDialog = () => {
         this.onChange({ 'modelDialogContentProps': null });
-        this.modelProps = this.defaultModelProps;
+        this.modelProps = this.defaultModelProps();
     }
 
     openTodoDialog = () => {
@@ -53,7 +55,24 @@ class AppFooter extends Component {
             onDialogClose: this.closeTodoDialog,
             modelDialogOkClick: this.addTodo,
             openModelDialog: true,
-            modelDialogContentProps: this.modelProps,
+            modelDialogContentProps: {
+                stateChanged: (state) => {
+                    this.modelProps = {
+                        ...this.modelProps,
+                        ...state
+                    }
+                    const newState = {                       
+                        ...this.modelProps,
+                        ...{
+                            items: ['Default', ...this.props.listItems.map((item) => {
+                                return item.name
+                            })]
+                        },
+                    }
+                    this.onChange({ 'modelDialogContentProps': newState })
+                },
+                ...this.getTodoModelDefaultprops()
+            },
             modelDialogContent: TodoModel
         }
         this.onChange(state)
@@ -74,7 +93,7 @@ class AppFooter extends Component {
                 <div className="todo-footer" style={this.footerStyle}>
                     <TextBox fullWidth={true} holderStyle={{ flex: 1 }} id="quickTodoTextBox" value={this.props.todoTextFromQuickAdd || ''} onChange={this.onChange} label="Quick Add Todo"></TextBox>
                     <FloatingAddButton onClick={this.openTodoDialog}></FloatingAddButton>
-                    <ModelDialog additionalModelDialogButtons={this.props.additionalModelDialogButtons} onDialogClose={this.props.onDialogClose} show={this.props.openModelDialog || false} stateChange={this.props.onChange} okButtonClick={this.props.modelDialogOkClick} okButtonName="Save" modelName={this.props.modelDialogContent} modelProps={this.props.modelDialogContentProps}></ModelDialog>
+                    <ModelDialog showCancelButton={this.props.showCancelButton} additionalModelDialogButtons={this.props.additionalModelDialogButtons} onDialogClose={this.props.onDialogClose} show={this.props.openModelDialog || false} stateChange={this.props.onChange} okButtonClick={this.props.modelDialogOkClick} okButtonName={this.props.okButtonName} modelName={this.props.modelDialogContent} modelProps={this.props.modelDialogContentProps}></ModelDialog>
                 </div>
             </footer>
         )
@@ -108,6 +127,8 @@ AppFooter.proptypes = {
         id: Proptypes.string,
         name: Proptypes.string
     })),
+    showCancelButton: Proptypes.bool,
+    okButtonName: Proptypes.string
 }
 
 AppFooter.defaultProps = {

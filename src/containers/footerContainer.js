@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
         modelDialogOkClick: state.componentsState.modelDialogOkClick,
         additionalModelDialogButtons: state.componentsState.additionalModelDialogButtons,
         listItems: state.TodoItems,
+        showCancelButton: state.componentsState.showCancelButton,
+        okButtonName: state.componentsState.okButtonName,
     }
 }
 

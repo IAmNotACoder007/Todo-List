@@ -12,6 +12,15 @@ class ModelDialog extends Component {
         }
         return '';
     }
+    getCancelButton() {
+        if (this.props.showCancelButton) {
+            return [{
+                text: "Cancel",
+                onClick: this.closeTodoDialog
+            }]
+        }
+        return [];
+    }
 
     getDialogButtons() {
         return (
@@ -20,10 +29,9 @@ class ModelDialog extends Component {
                 {
                     text: this.props.okButtonName,
                     onClick: this.okButtonClick
-                }, {
-                    text: "Cancel",
-                    onClick: this.closeTodoDialog
-                }]
+                },
+                ...this.getCancelButton()
+            ]
         )
     }
     okButtonClick = () => {
@@ -60,14 +68,16 @@ ModelDialog.proptypes = {
     additionalModelDialogButtons: Proptypes.arrayOf(Proptypes.shape({
         text: Proptypes.string,
         onClick: Proptypes.func
-    }))
+    })),
+    showCancelButton: Proptypes.bool,    
 }
 
 ModelDialog.defaultProps = {
     okButtonName: "Ok",
     dialogTitle: '',
     show: false,
-    additionalModelDialogButtons: []
+    additionalModelDialogButtons: [],
+    showCancelButton: true,    
 }
 
 export default ModelDialog;

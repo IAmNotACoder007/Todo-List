@@ -3,6 +3,7 @@ import './App.css';
 import HeaderContainer from './containers/headerContainer';
 import FooterContainer from './containers/footerContainer';
 import TodosContainer from './containers/todosContainer';
+import GlobalItemsContainer from './containers/globalItemsContainer';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
           <HeaderContainer></HeaderContainer>
           <TodosContainer></TodosContainer>
           <FooterContainer></FooterContainer>
+          <GlobalItemsContainer></GlobalItemsContainer>
         </div>
       </MuiThemeProvider>
     );

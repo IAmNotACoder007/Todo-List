@@ -5,6 +5,23 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 class StringArrayEditor extends Component {
+    deleteItem = (id) => {
+        this.confirmThenDelete(id);
+    }
+
+    confirmThenDelete = (id) => {
+        const confirmationDialogState = {
+            confirmationDialogTitle: "Alert",
+            askConfimation: true,
+            onConfirmation: () => {
+                this.props.onDelete(id)
+            },
+            changeState: this.props.changeState
+        }
+
+        this.props.changeState(confirmationDialogState)
+    }
+
     getEditDeteleIconForEntity(id) {
         if (id) {
             return (
@@ -12,7 +29,7 @@ class StringArrayEditor extends Component {
                     <IconButton color="inherit">
                         <EditIcon />
                     </IconButton>
-                    <IconButton color="inherit">
+                    <IconButton color="inherit" onClick={() => { this.deleteItem(id) }}>
                         <DeleteIcon />
                     </IconButton>
                 </div>
@@ -38,6 +55,8 @@ class StringArrayEditor extends Component {
 
 StringArrayEditor.proptypes = {
     entities: Proptypes.arrayOf(Proptypes.object),
+    changeState: Proptypes.func,
+    onDelete: Proptypes.func
 }
 
 StringArrayEditor.defaultProps = {

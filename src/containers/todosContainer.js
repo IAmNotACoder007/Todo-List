@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
 
         modelDialogContent: state.componentsState.modelDialogContent,
         modelDialogContentProps: state.componentsState.modelDialogContentProps,
+        listItems: state.TodoItems,
     }
 }
 

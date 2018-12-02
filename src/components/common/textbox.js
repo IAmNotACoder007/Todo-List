@@ -28,8 +28,7 @@ class TextBox extends Component {
                     id={this.props.id}
                     label={this.props.label}
                     className={styles.textField}
-                    value={this.state[this.props.id || "textbox"]}
-                    defaultValue={this.props.defaultValue}
+                    value={this.state[this.props.id || "textbox"] || this.props.defaultValue}                   
                     onChange={this.handleChange(this.props.id || "textbox")}
                     margin="normal"
                     fullWidth={this.props.fullWidth}

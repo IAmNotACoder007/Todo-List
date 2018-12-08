@@ -3,15 +3,30 @@ import Dialog from './dialog';
 import Proptypes from 'prop-types';
 
 class ModelDialog extends Component {
+    modelState = {};
+    getModelContentState() {
+        return (
+            {
+                ...this.props.modelProps,
+                stateChanged: this.onModelStateChange
+            }
+        )
+    }
+
     getDialogContent() {
         const Model = this.props.modelName;
         if (Model) {
             return (
-                <Model {...this.props.modelProps}></Model>
+                <Model {...this.getModelContentState()}></Model>
             )
         }
         return '';
     }
+
+    onModelStateChange = (state) => {
+        this.modelState = { ...this.modelState, ...state };
+    }
+
     getCancelButton() {
         if (this.props.showCancelButton) {
             return [{
@@ -35,13 +50,14 @@ class ModelDialog extends Component {
         )
     }
     okButtonClick = () => {
-        const isValidDialog = this.props.okButtonClick();
+        const isValidDialog = this.props.okButtonClick({ ...this.props.modelProps, ...this.modelState });
         if (isValidDialog !== false)
             this.closeTodoDialog();
 
     }
 
     closeTodoDialog = () => {
+        this.modelState={};
         this.props.stateChange({
             "openModelDialog": false,
         });
@@ -69,7 +85,7 @@ ModelDialog.proptypes = {
         text: Proptypes.string,
         onClick: Proptypes.func
     })),
-    showCancelButton: Proptypes.bool,    
+    showCancelButton: Proptypes.bool,
 }
 
 ModelDialog.defaultProps = {
@@ -77,7 +93,7 @@ ModelDialog.defaultProps = {
     dialogTitle: '',
     show: false,
     additionalModelDialogButtons: [],
-    showCancelButton: true,    
+    showCancelButton: true,
 }
 
 export default ModelDialog;

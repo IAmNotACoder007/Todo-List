@@ -14,6 +14,15 @@ class TextBox extends Component {
         this.props.onChange({ [prop]: event.target.value })
     };
 
+    onKeyPress = (prop, event) => {
+        if (event.charCode === 13 && this.props.clearOnEnetrKeyPress) {
+            document.getElementById(prop).value = '';
+            this.setState({
+                [prop]: '',
+            });           
+        }
+    }
+
     render() {
         const styles = theme => ({
             textField: {
@@ -28,12 +37,13 @@ class TextBox extends Component {
                     id={this.props.id}
                     label={this.props.label}
                     className={styles.textField}
-                    value={this.state[this.props.id || "textbox"] || this.props.defaultValue}                   
                     onChange={this.handleChange(this.props.id || "textbox")}
                     margin="normal"
                     fullWidth={this.props.fullWidth}
                     error={this.props.error}
                     helperText={this.props.helperText}
+                    defaultValue={this.props.defaultValue}
+                    onKeyPress={(event) => { this.onKeyPress(this.props.id, event) }}
                 />
             </div>
         )
@@ -47,16 +57,18 @@ TextBox.proptypes = {
     holderStyle: Proptypes.object,
     fullWidth: Proptypes.bool,
     error: Proptypes.bool,
-    helperText: Proptypes.string
+    helperText: Proptypes.string,
+    clearOnEnetrKeyPress: Proptypes.bool
 }
 
 TextBox.defaultProps = {
-    value: '',
     label: '',
     id: '',
     fullWidth: false,
     error: false,
-    helperText: ''
+    helperText: '',
+    clearOnEnetrKeyPress: false,
+    defaultValue: ''
 }
 
 export default TextBox;

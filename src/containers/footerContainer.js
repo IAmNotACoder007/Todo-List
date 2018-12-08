@@ -6,15 +6,7 @@ import { addTodo, stateChange } from '../actions/index';
 const mapStateToProps = (state) => {
     return {
         todoTextFromQuickAdd: state.componentsState.quickTodoTextBox,
-        openModelDialog: state.componentsState.openModelDialog,
-        modelDialogContent: state.componentsState.modelDialogContent,
-        modelDialogContentProps: state.componentsState.modelDialogContentProps,
-        onDialogClose: state.componentsState.onDialogClose,
-        modelDialogOkClick: state.componentsState.modelDialogOkClick,
-        additionalModelDialogButtons: state.componentsState.additionalModelDialogButtons,
         listItems: state.TodoItems,
-        showCancelButton: state.componentsState.showCancelButton,
-        okButtonName: state.componentsState.okButtonName,
     }
 }
 

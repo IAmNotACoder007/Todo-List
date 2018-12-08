@@ -39,26 +39,19 @@ class Todos extends Component {
                 return item.name
             })]
         }
-        let modelDialogProps = {
-            stateChanged: (state) => {
-                modelDialogProps = {
-                    ...modelDialogProps,
-                    ...state
-                }
-                this.props.stateChange({ 'modelDialogContentProps': modelDialogProps })
-            },
+        let modelDialogProps = {           
             ...modelProps
         }
 
         const state = {
             openModelDialog: true,
             onDialogClose: this.onDialogClose,
-            modelDialogOkClick: () => {
-                if (!this.props.modelDialogContentProps.todoTextFromDialog) {
+            modelDialogOkClick: (content) => {             
+                if (!content.todoTextFromDialog) {
                     this.props.stateChange({ "modelDialogContentProps": { ...modelDialogProps, todoTextError: true } })
                     return false;
                 }
-                this.props.editTodo(id, this.props.modelDialogContentProps.todoTextFromDialog, getFormattedDateString(this.props.modelDialogContentProps.dueDate || date), this.props.modelDialogContentProps.selectedListItem || listName)
+                this.props.editTodo(id, content.todoTextFromDialog, getFormattedDateString(content.dueDate || date), content.selectedListItem || listName)
             },
             modelDialogContentProps: modelDialogProps,
             modelDialogContent: TodoModel

@@ -5,6 +5,10 @@ import List from '../list';
 import Proptypes from 'prop-types';
 
 class TodoModel extends Component {
+    state = {
+        selectedItem: ''
+    }
+
     onChange = (value) => {
         this.props.stateChanged(value);
     }
@@ -22,7 +26,12 @@ class TodoModel extends Component {
                             state = { ...state, todoTextError: false }
                         } this.onChange(state)
                     }} label="What Needs To Be Done?"></TextBox>
-                <List items={this.props.items} defaultValue={this.props.selectedListItem} onChange={(text) => this.onChange({ "selectedListItem": text })}></List>
+                <List items={this.props.items} defaultValue={this.state.selectedItem || this.props.selectedListItem} onChange={
+                    (text) => {
+                        this.onChange({ "selectedListItem": text })
+                        this.setState({ selectedItem: text })
+                    }
+                }></List>
                 <DateTime id="dueDate" onChange={this.props.stateChanged} defaultValue={this.props.dueDate}></DateTime>
             </div>
         )

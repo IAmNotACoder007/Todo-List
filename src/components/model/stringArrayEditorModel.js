@@ -16,7 +16,8 @@ class StringArrayEditor extends Component {
             onConfirmation: () => {
                 this.props.onDelete(id)
             },
-            changeState: this.props.changeState
+            changeState: this.props.changeState,
+            confirmationMessage: this.props.confirmationMessage
         }
 
         this.props.changeState(confirmationDialogState)
@@ -56,7 +57,8 @@ class StringArrayEditor extends Component {
 StringArrayEditor.proptypes = {
     entities: Proptypes.arrayOf(Proptypes.object),
     changeState: Proptypes.func,
-    onDelete: Proptypes.func
+    onDelete: Proptypes.func,
+    confirmationMessage:Proptypes.string
 }
 
 StringArrayEditor.defaultProps = {

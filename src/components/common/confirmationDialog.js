@@ -28,7 +28,7 @@ class ConfirmationDialog extends Component {
     render() {
         return (
             <div className="confirmation-dialog-holder">
-                <Dialog buttons={this.getConfirmationDialogButtons()} open={this.props.askConfimation} content={this.props.confirmationMessage} title={this.props.confirmationDialogTitle}>
+                <Dialog isAlertDialog={true} buttons={this.getConfirmationDialogButtons()} open={this.props.askConfimation} content={this.props.confirmationMessage} title={this.props.confirmationDialogTitle}>
                 </Dialog>
             </div>
         )

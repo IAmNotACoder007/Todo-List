@@ -5,6 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types'
+import Slide from '@material-ui/core/Slide';
 
 class MaterialDialog extends Component {
     getDialogContent() {
@@ -14,6 +15,8 @@ class MaterialDialog extends Component {
             </DialogContent>
         )
     }
+
+
 
     getDialogTitle() {
         return (
@@ -39,6 +42,8 @@ class MaterialDialog extends Component {
             <Dialog
                 open={this.props.open}
                 aria-labelledby="form-dialog-title"
+                TransitionComponent={this.props.isAlertDialog ? Transition : undefined}
+
             >
                 {this.getDialogTitle()}
                 {this.getDialogContent()}
@@ -49,6 +54,11 @@ class MaterialDialog extends Component {
         )
     }
 }
+
+function Transition(props) {
+    return <Slide direction="up" {...props} />;
+}
+
 const buttonModel = {
     text: PropTypes.string,
     onClick: PropTypes.func
@@ -58,12 +68,14 @@ MaterialDialog.propTypes = {
     content: PropTypes.any.isRequired,
     title: PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.shape(buttonModel)).isRequired,
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    isAlertDialog: PropTypes.bool
 }
 
 MaterialDialog.defaultProps = {
     title: "",
-    open: false
+    open: false,
+    isAlertDialog: false
 }
 
 export default MaterialDialog;

@@ -36,6 +36,7 @@ class AppHeader extends Component {
             modelDialogContentProps: {
                 entities: this.getListItems(),
                 changeState: this.props.stateChange,
+                confirmationMessage: "Are you sure you want to delete this List Item.",
                 onDelete: (id) => {
                     this.props.deleteTodoItem(id);
                     this.refreshTodoItemDialog = true;

@@ -37,8 +37,8 @@ GlobalItems.propTypes = {
     onConfirmation: Proptypes.func,
     stateChange: Proptypes.func,
     modelDialogOkClick: Proptypes.func,
-    modelDialogContentProps: Proptypes.Object,
-    modelDialogContent: Proptypes.element,
+    modelDialogContentProps: Proptypes.any,
+    modelDialogContent: Proptypes.any,
     additionalModelDialogButtons: Proptypes.arrayOf(Proptypes.shape({
         text: Proptypes.string,
         onClick: Proptypes.func
@@ -47,6 +47,10 @@ GlobalItems.propTypes = {
     okButtonName: Proptypes.string,
     onDialogClose: Proptypes.func,
     openModelDialog: Proptypes.bool,
+}
+
+GlobalItems.defaultProps = {
+    modelDialogContentProps: {}
 }
 
 export default GlobalItems

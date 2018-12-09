@@ -77,6 +77,7 @@ class AppHeader extends Component {
                 const state = {
                     additionalModelDialogButtons: [],
                     showCancelButton: true,
+                    okButtonName: undefined,
                 }
                 this.props.stateChange(state);
             }

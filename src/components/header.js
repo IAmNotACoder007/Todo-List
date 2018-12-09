@@ -54,13 +54,13 @@ class AppHeader extends Component {
             okButtonName: "Close",
             additionalModelDialogButtons: [
                 {
-                    text: "Add Item",
+                    text: "Add New",
                     onClick: () => {
                         const stringEditorProps = {
                             stringEditorTextboxlabel: "List Name",
                             stringEditorTextboxId: "newListName",
                             stateChange: this.props.stateChange,
-                            stringEditorTitle: "Add List",
+                            stringEditorTitle: "New Todos Category",
                             stringEditorValueChange: (value) => {
                                 newItem = !Object.keys(value) ? "" : Object.values(value)[0];
                             },
@@ -92,7 +92,7 @@ class AppHeader extends Component {
             onClick: this.handleClose,
         },
         {
-            name: 'Todo items',
+            name: 'Todos Category',
             onClick: this.refreshTodoItemDialog ? this.showTodoItems() : this.showTodoItems,
         }]
     }

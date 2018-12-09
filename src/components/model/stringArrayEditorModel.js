@@ -16,6 +16,7 @@ class StringArrayEditor extends Component {
             stringEditorProps: {
                 isRequired: true,
                 stringEditorTextboxId: 'listItemName',
+                stringEditorTitle: "Edit Todos Category",
                 stringEditorDefaultValue: name,
                 stringEditorOkClick: () => {
                     this.props.onEditComplete(id, listItemName);

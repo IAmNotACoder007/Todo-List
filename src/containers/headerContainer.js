@@ -1,5 +1,5 @@
 import Header from '../components/header';
-import { filterTodos, stateChange, addTodoItem, deleteTodoItem } from '../actions/index';
+import { filterTodos, stateChange, addTodoItem, deleteTodoItem, editTodoItem } from '../actions/index';
 import { connect } from 'react-redux';
 
 
@@ -28,7 +28,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         deleteTodoItem: (id) => {
             dispatch(deleteTodoItem(id))
-        }
+        },
+        editTodoItem: (id, name) => {
+            dispatch(editTodoItem(id, name))
+        },
     }
 }
 

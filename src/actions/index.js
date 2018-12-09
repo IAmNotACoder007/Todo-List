@@ -52,3 +52,11 @@ export const deleteTodoItem = (id) => {
     }
 }
 
+export const editTodoItem = (id, name) => {
+    return {
+        type: "EDIT_TODO_ITEM",
+        id,
+        name
+    }
+}
+

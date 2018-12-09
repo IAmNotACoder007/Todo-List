@@ -9,6 +9,26 @@ class StringArrayEditor extends Component {
         this.confirmThenDelete(id);
     }
 
+    editItem = (id, name) => {
+        let listItemName = undefined;
+        const state = {
+            openStringEditor: true,
+            stringEditorProps: {
+                isRequired: true,
+                stringEditorTextboxId: 'listItemName',
+                stringEditorDefaultValue: name,
+                stringEditorOkClick: () => {
+                    this.props.onEditComplete(id, listItemName);
+                },
+                stringEditorValueChange: (name) => {
+                    listItemName = Object.values(name)[0];
+                },
+                stateChange: this.props.changeState
+            }
+        }
+        this.props.changeState(state);
+    }
+
     confirmThenDelete = (id) => {
         const confirmationDialogState = {
             confirmationDialogTitle: "Alert",
@@ -23,11 +43,11 @@ class StringArrayEditor extends Component {
         this.props.changeState(confirmationDialogState)
     }
 
-    getEditDeteleIconForEntity(id) {
+    getEditDeteleIconForEntity(id, name) {
         if (id) {
             return (
                 <div>
-                    <IconButton color="inherit">
+                    <IconButton color="inherit" onClick={() => { this.editItem(id, name) }}>
                         <EditIcon />
                     </IconButton>
                     <IconButton color="inherit" onClick={() => { this.deleteItem(id) }}>
@@ -45,7 +65,7 @@ class StringArrayEditor extends Component {
                     return (
                         <div key={entity.id || entity.name} style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
                             <span style={{ flex: '1' }}>{entity.name}</span>
-                            {this.getEditDeteleIconForEntity(entity.id)}
+                            {this.getEditDeteleIconForEntity(entity.id, entity.name)}
                         </div>
                     )
                 })}
@@ -58,7 +78,8 @@ StringArrayEditor.proptypes = {
     entities: Proptypes.arrayOf(Proptypes.object),
     changeState: Proptypes.func,
     onDelete: Proptypes.func,
-    confirmationMessage:Proptypes.string
+    confirmationMessage: Proptypes.string,
+    onEditComplete: Proptypes.func
 }
 
 StringArrayEditor.defaultProps = {

@@ -40,6 +40,10 @@ class AppHeader extends Component {
                 onDelete: (id) => {
                     this.props.deleteTodoItem(id);
                     this.refreshTodoItemDialog = true;
+                },
+                onEditComplete: (id, name) => {
+                    this.props.editTodoItem(id, name);
+                    this.refreshTodoItemDialog = true;
                 }
             },
             modelDialogOkClick: () => {
@@ -138,7 +142,8 @@ AppHeader.propTypes = {
     openStringEditor: PropTypes.bool,
     stringEditorProps: PropTypes.object,
     addTodoItem: PropTypes.func,
-    deleteTodoItem: PropTypes.func
+    deleteTodoItem: PropTypes.func,
+    editTodoItem: PropTypes.func
 }
 
 AppHeader.defaultProps = {

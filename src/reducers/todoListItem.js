@@ -13,7 +13,13 @@ const TodoItems = (state, action) => {
             return state.filter((item) => {
                 return item.id !== action.id;
             })
-
+        case "EDIT_TODO_ITEM":
+            return state.filter((item) => {
+                if (item.id === action.id) {
+                    item.name = action.name;
+                }
+                return item;
+            })
         default:
             return (
                 state || []

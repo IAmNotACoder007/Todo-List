@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 import Checkbox from './common/checkbox';
 import TodoModel from './model/todoModel';
-import { getFormattedDateString } from './helpers/dateUtils'
+import { getFormattedDateString, isTodaysDate, isTommorowsDate } from './helpers/dateUtils'
 class Todos extends Component {
     todoItemsStyle = {
         display: 'flex',
@@ -39,14 +39,14 @@ class Todos extends Component {
                 return item.name
             })]
         }
-        let modelDialogProps = {           
+        let modelDialogProps = {
             ...modelProps
         }
 
         const state = {
             openModelDialog: true,
             onDialogClose: this.onDialogClose,
-            modelDialogOkClick: (content) => {             
+            modelDialogOkClick: (content) => {
                 if (!content.todoTextFromDialog) {
                     this.props.stateChange({ "modelDialogContentProps": { ...modelDialogProps, todoTextError: true } })
                     return false;
@@ -58,9 +58,64 @@ class Todos extends Component {
         }
         this.props.stateChange(state)
     }
+
+    getGroupsForTodos = () => {
+        let todosWithGroups = [];
+        if (this.props.todoItems.length) {
+            todosWithGroups = this.props.todoItems.map((todo) => {
+                const todoWithGroup = { ...todo, ...{ groupName: this.getGroupName(todo.dueDate) } };
+                return todoWithGroup;
+            });
+        }
+        return todosWithGroups;
+    }
+
+    getGroupName(date) {
+        if (date) {
+            const dateObj = new Date(date);
+            if (!isNaN(dateObj.getHours())) {
+                if (isTodaysDate(date))
+                    return "Today";
+                else if (isTommorowsDate(date))
+                    return "Tomorrow";
+                else
+                    return "Later";
+            }
+        }
+
+        return "No Date";
+    }
+
     getTodos() {
         if (this.props.todoItems && this.props.todoItems.length) {
-            return this.props.todoItems.map((todo) => {
+            const todosWithGroups = this.getGroupsForTodos();
+            const groups = ["Today", "Tomorrow", "Later", "No Date"];
+            return groups.map((group) => {
+                const todos = todosWithGroups.filter((todo) => {
+                    return todo.groupName === group;
+                });
+                if (todos && todos.length) {
+                    return (
+                        <div key={group}>
+                            <div style={{ paddingBottom: '5px', fontWeight: 500, color: "#2196F3" }} className="group-name">{group}</div>
+                            {this.getView(todos)}
+                        </div>
+                    )
+                } else {
+                    return "";
+                }
+
+            });
+        } else {
+            return (
+                <div className="no-data-found">No Data Found</div>
+            )
+        }
+    }
+
+    getView(todos) {
+        if (todos && todos.length)
+            return todos.map((todo) => {
                 return (
                     <div key={todo.id} style={this.todoItemsStyle}>
                         <Checkbox checked={todo.completed} finishTodo={() => { this.props.finishTodo(todo.id) }}></Checkbox>
@@ -71,12 +126,7 @@ class Todos extends Component {
                         </div>
                     </div>
                 )
-            })
-        } else {
-            return (
-                <div className="no-data-found">No Data Found</div>
-            )
-        }
+            });
     }
     render() {
         return (

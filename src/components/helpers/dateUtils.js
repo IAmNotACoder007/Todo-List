@@ -18,6 +18,25 @@ export function getFormattedDateString(date) {
 
 }
 
+export function isTodaysDate(date) {
+    if (!date) return false;
+    const todayDateObj = new Date();
+    const dateObj = new Date(date);
+    return (todayDateObj.getDate() === dateObj.getDate()
+        && todayDateObj.getMonth() === dateObj.getMonth()
+        && todayDateObj.getFullYear() === dateObj.getFullYear())
+}
+
+export function isTommorowsDate(date) {
+    if (!date) return false;
+    const todayDateObj = new Date();
+    const dateObj = new Date(date);
+    return ((todayDateObj.getDate() + 1) === dateObj.getDate()
+        && todayDateObj.getMonth() === dateObj.getMonth()
+        && todayDateObj.getFullYear() === dateObj.getFullYear())
+}
+
+
 var shortMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const shortDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 

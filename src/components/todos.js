@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 import Checkbox from './common/checkbox';
 import TodoModel from './model/todoModel';
-import { getFormattedDateString, isTodaysDate, isTommorowsDate } from './helpers/dateUtils'
+import { getFormattedDateString, isTodaysDate, isTommorowsDate } from './helpers/dateUtils';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import IconButton from '@material-ui/core/IconButton';
+
 class Todos extends Component {
     todoItemsStyle = {
         display: 'flex',
@@ -10,7 +13,8 @@ class Todos extends Component {
         marginBottom: '10px',
         boxShadow: '0px 0px 1px 1px #BDBDBD',
         padding: '2px',
-        borderRadius: '2px'
+        borderRadius: '2px',
+        marginLeft: '25px'
     }
 
     todoInfoStyle = {
@@ -66,6 +70,12 @@ class Todos extends Component {
                 const todoWithGroup = { ...todo, ...{ groupName: this.getGroupName(todo.dueDate) } };
                 return todoWithGroup;
             });
+
+            todosWithGroups = todosWithGroups.sort(function (a, b) {
+                if (a.groupName !== "No Date" && b.groupName !== "No Date")
+                    return new Date(a.dueDate).valueOf() - new Date(b.dueDate).valueOf();
+                return 0;
+            })
         }
         return todosWithGroups;
     }
@@ -86,6 +96,19 @@ class Todos extends Component {
         return "No Date";
     }
 
+    collapseExpandTodos = (event) => {
+        debugger;
+        const svgElement = event.currentTarget.getElementsByClassName("expand-collaps-arrow")[0];
+        if (svgElement.classList.contains("opened")) {
+            svgElement.classList.remove("opened");
+            svgElement.closest("#groupName").nextElementSibling.style.display = "none";
+        }
+        else {
+            svgElement.classList.add("opened");
+            svgElement.closest("#groupName").nextElementSibling.style.display = "block";
+        }
+    }
+
     getTodos() {
         if (this.props.todoItems && this.props.todoItems.length) {
             const todosWithGroups = this.getGroupsForTodos();
@@ -97,8 +120,15 @@ class Todos extends Component {
                 if (todos && todos.length) {
                     return (
                         <div key={group}>
-                            <div style={{ paddingBottom: '5px', fontWeight: 500, color: "#2196F3" }} className="group-name">{group}</div>
-                            {this.getView(todos)}
+                            <div id="groupName" style={{ display: 'flex', alignItems: 'center', paddingBottom: '5px', fontWeight: 500, color: "#2196F3" }} className="group-name">
+                                <IconButton className="expand-collaps-arrow-holder" color="inherit" onClick={(e) => { this.collapseExpandTodos(e) }}>
+                                    <PlayArrow className="expand-collaps-arrow opened"></PlayArrow>
+                                </IconButton>
+                                {group}
+                            </div>
+                            <div id="todosItems">
+                                {this.getView(todos)}
+                            </div>
                         </div>
                     )
                 } else {
@@ -139,6 +169,7 @@ class Todos extends Component {
             </div>
         )
     }
+
 }
 
 const todosInfo = {

@@ -52,6 +52,20 @@ html, body, #root {
   color: #61dafb;
 }
 
+.group-name .expand-collaps-arrow {
+  font-size: 18px;
+}
+
+.expand-collaps-arrow.opened {
+  transform: rotate(90deg);
+}
+
+.group-name .expand-collaps-arrow-holder {
+  height: 26px;
+  width: 26px;
+  padding: 0;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

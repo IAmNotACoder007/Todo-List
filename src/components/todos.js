@@ -147,8 +147,11 @@ class Todos extends Component {
         if (todos && todos.length)
             return todos.map((todo) => {
                 return (
-                    <div key={todo.id} style={this.todoItemsStyle}>
-                        <Checkbox checked={todo.completed} finishTodo={() => { this.props.finishTodo(todo.id) }}></Checkbox>
+                    <div key={todo.id} style={this.todoItemsStyle} className="cssanimation">
+                        <Checkbox checked={todo.completed} finishTodo={(target, value) => {
+                            target.closest('.cssanimation').classList.add("fadeOutLeft");
+                            window.setTimeout(() => { this.props.finishTodo(todo.id) }, 1000);
+                        }}></Checkbox>
                         <div style={this.todoInfoStyle} onClick={() => { this.editTodo(todo.id, todo.todoText, todo.todoList, todo.dueDate) }}>
                             <span style={todo.dueDate ? this.todoElementstyle : {}}>{todo.todoText}</span>
                             <span style={todo.dueDate ? { ...this.todoElementstyle, fontSize: '13px', color: '#2196F3' } : { display: 'none' }}>{todo.dueDate}</span>
@@ -163,7 +166,8 @@ class Todos extends Component {
             <div className="todo-items-holder" style={{
                 flex: 1, maxHeight: 'calc(100% - 160px)',
                 overflow: 'auto',
-                padding: '10px'
+                padding: '10px',
+                overflowX: 'hidden'
             }}>
                 {this.getTodos()}
             </div>

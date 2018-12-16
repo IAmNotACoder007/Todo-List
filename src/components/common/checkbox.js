@@ -4,15 +4,19 @@ import Proptypes from 'prop-types';
 
 
 class CheckBox extends Component {
+    state = {
+        [this.props.value]: undefined
+    }
     handleChange = name => event => {
-        this.props.finishTodo(event.target.checked)
+        this.setState({ [name]: event.target.checked });
+        this.props.finishTodo(event.target, event.target.checked)
     };
 
     render() {
         return (
             <div className="checkbox-holder">
                 <Checkbox
-                    checked={this.props.checked}
+                    checked={this.state[this.props.value] === undefined ? this.props.checked : this.state[this.props.value]}
                     onChange={this.handleChange(this.props.value)}
                     value={this.props.value}
                     color="primary"
@@ -30,7 +34,7 @@ CheckBox.proptypes = {
 
 CheckBox.defaultProps = {
     checked: false,
-    value: ''
+    value: 'checkbox'
 }
 
 export default CheckBox;

@@ -5,6 +5,7 @@ import TodoModel from './model/todoModel';
 import { getFormattedDateString, isTodaysDate, isTommorowsDate } from './helpers/dateUtils';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import IconButton from '@material-ui/core/IconButton';
+import sleeping from '../images/sleeping.gif';
 
 class Todos extends Component {
     todoItemsStyle = {
@@ -137,7 +138,9 @@ class Todos extends Component {
             });
         } else {
             return (
-                <div className="no-data-found">No Data Found</div>
+                <div className="no-data-found">
+                    <img src={sleeping} alt="Nothig to do here" style={{ height: 200, width: 200 }} />
+                </div>
             )
         }
     }

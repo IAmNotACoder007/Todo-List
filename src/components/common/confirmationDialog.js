@@ -21,7 +21,11 @@ class ConfirmationDialog extends Component {
             },
             {
                 text: "no",
-                onClick: this.closeConfirmationDialog
+                onClick: () => {
+                    this.closeConfirmationDialog();
+                    if (this.props.onConfirmationCancel)
+                        this.props.onConfirmationCancel()
+                }
             }
         ]
     }
@@ -41,7 +45,8 @@ ConfirmationDialog.propTypes = {
     askConfimation: Proptypes.bool,
     onConfirmation: Proptypes.func,
     changeState: Proptypes.func,
-    onConfirmationDialogClose: Proptypes.func
+    onConfirmationDialogClose: Proptypes.func,
+    onConfirmationCancel: Proptypes.func
 }
 
 ConfirmationDialog.defaultProps = {

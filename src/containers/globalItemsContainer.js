@@ -16,6 +16,8 @@ const mapStateToProps = (state) => {
         additionalModelDialogButtons: state.componentsState.additionalModelDialogButtons,
         showCancelButton: state.componentsState.showCancelButton,
         okButtonName: state.componentsState.okButtonName,
+        onConfirmationDialogClose: state.componentsState.onConfirmationDialogClose,
+        onConfirmationCancel: state.componentsState.onConfirmationCancel,
     }
 }
 

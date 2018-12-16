@@ -4,12 +4,24 @@ import Proptypes from 'prop-types';
 
 
 class CheckBox extends Component {
-    state = {
-        [this.props.value]: undefined
+    constructor(props) {
+        super(props);
+        this.defaultState = {
+            [this.props.value]: undefined
+        }
+
+        this.state = this.defaultState;
     }
+
+    resetState = () => {
+        this.setState(this.defaultState);
+    }
+
     handleChange = name => event => {
         this.setState({ [name]: event.target.checked });
-        this.props.finishTodo(event.target, event.target.checked)
+        if (this.props.onClick) {
+            this.props.onClick(event.target, event.target.checked, this.resetState)
+        }
     };
 
     render() {
@@ -29,7 +41,7 @@ class CheckBox extends Component {
 CheckBox.proptypes = {
     checked: Proptypes.bool,
     value: Proptypes.string,
-    finishTodo: Proptypes.func.isRequired
+    onClick: Proptypes.func.isRequired
 }
 
 CheckBox.defaultProps = {

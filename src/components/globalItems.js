@@ -23,6 +23,8 @@ class GlobalItems extends Component {
                     onConfirmation={this.props.onConfirmation}
                     askConfimation={this.props.askConfimation}
                     confirmationDialogTitle={this.props.confirmationDialogTitle}
+                    onConfirmationDialogClose={this.props.onConfirmationDialogClose}
+                    onConfirmationCancel={this.props.onConfirmationCancel}
                     confirmationMessage={this.props.confirmationMessage}>
                 </ConfirmationDialog>
             </div>
@@ -47,6 +49,8 @@ GlobalItems.propTypes = {
     okButtonName: Proptypes.string,
     onDialogClose: Proptypes.func,
     openModelDialog: Proptypes.bool,
+    onConfirmationDialogClose: Proptypes.func,
+    onConfirmationCancel: Proptypes.func
 }
 
 GlobalItems.defaultProps = {

@@ -97,7 +97,6 @@ class Todos extends Component {
     }
 
     collapseExpandTodos = (event) => {
-        debugger;
         const svgElement = event.currentTarget.getElementsByClassName("expand-collaps-arrow")[0];
         if (svgElement.classList.contains("opened")) {
             svgElement.classList.remove("opened");
@@ -143,14 +142,42 @@ class Todos extends Component {
         }
     }
 
+    askConfirmation(onConfirmation, onCancel) {
+        const state = {
+            changeState: this.props.stateChange,
+            onConfirmation: onConfirmation,
+            askConfimation: true,
+            confirmationDialogTitle: "Finish Todo",
+            confirmationMessage: "Do you want to finish this Todo?",
+            onConfirmationDialogClose: this.resetConfirmationDialog,
+            onConfirmationCancel: () => {
+                onCancel();
+            }
+        }
+
+        this.props.stateChange(state);
+    }
+
+    resetConfirmationDialog = () => {
+        const state = {
+            onConfirmation: undefined,
+            askConfimation: false,
+            onConfirmationCancel: undefined,
+            onConfirmationDialogClose: undefined
+        }
+        this.props.stateChange(state);
+    }
+
     getView(todos) {
         if (todos && todos.length)
             return todos.map((todo) => {
                 return (
                     <div key={todo.id} style={this.todoItemsStyle} className="cssanimation">
-                        <Checkbox checked={todo.completed} finishTodo={(target, value) => {
-                            target.closest('.cssanimation').classList.add("fadeOutLeft");
-                            window.setTimeout(() => { this.props.finishTodo(todo.id) }, 1000);
+                        <Checkbox checked={todo.completed} onClick={(target, value, resetState) => {
+                            this.askConfirmation(() => {
+                                target.closest('.cssanimation').classList.add("fadeOutLeft");
+                                window.setTimeout(() => { this.props.finishTodo(todo.id) }, 1000);
+                            }, resetState);
                         }}></Checkbox>
                         <div style={this.todoInfoStyle} onClick={() => { this.editTodo(todo.id, todo.todoText, todo.todoList, todo.dueDate) }}>
                             <span style={todo.dueDate ? this.todoElementstyle : {}}>{todo.todoText}</span>

@@ -20,7 +20,7 @@ class TodoModel extends Component {
     render() {
         return (
             <div>
-                <TextBox helperText={this.getHelperText()} error={this.props.todoTextError} id="todoTextFromDialog" defaultValue={this.props.todoTextFromDialog || ''}
+                <TextBox fullWidth helperText={this.getHelperText()} error={this.props.todoTextError} id="todoTextFromDialog" defaultValue={this.props.todoTextFromDialog || ''}
                     onChange={(state) => {
                         if (Object.values(state)[0]) {
                             state = { ...state, todoTextError: false }

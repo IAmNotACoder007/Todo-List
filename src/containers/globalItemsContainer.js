@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
         confirmationMessage: state.componentsState.confirmationMessage,
         confirmationDialogTitle: state.componentsState.confirmationDialogTitle,
         askConfimation: state.componentsState.askConfimation,
-        onConfirmation: state.componentsState.onConfirmation,       
+        onConfirmation: state.componentsState.onConfirmation,
         openModelDialog: state.componentsState.openModelDialog,
         modelDialogContent: state.componentsState.modelDialogContent,
         modelDialogContentProps: state.componentsState.modelDialogContentProps,
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
         okButtonName: state.componentsState.okButtonName,
         onConfirmationDialogClose: state.componentsState.onConfirmationDialogClose,
         onConfirmationCancel: state.componentsState.onConfirmationCancel,
+        modelDialogTitle: state.componentsState.modelDialogTitle,
     }
 }
 

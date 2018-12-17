@@ -31,7 +31,7 @@ class DateTime extends Component {
         const { classes } = this.props;
         return (
             <div className="data-time-holder">
-                <TextField
+                <TextField fullWidth
                     id="datetime-local"
                     label={this.props.label}
                     type="datetime-local"
@@ -40,7 +40,7 @@ class DateTime extends Component {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={this.handleChange(this.props.id || "textbox")}
+                    onChange={this.handleChange(this.props.id || "datetime")}
                 />
             </div>
         )
@@ -70,8 +70,7 @@ const styles = theme => ({
     },
     textField: {
         marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 200,
+        marginRight: theme.spacing.unit,        
     },
 });
 

@@ -57,7 +57,7 @@ class ModelDialog extends Component {
     }
 
     closeTodoDialog = () => {
-        this.modelState={};
+        this.modelState = {};
         this.props.stateChange({
             "openModelDialog": false,
         });
@@ -67,7 +67,9 @@ class ModelDialog extends Component {
 
     render() {
         return (
-            <Dialog open={this.props.show} content={this.getDialogContent()} buttons={this.getDialogButtons()} title={this.props.title}></Dialog>
+            <div className="model-dialog-container">
+                <Dialog className="model-dialog" open={this.props.show} content={this.getDialogContent()} buttons={this.getDialogButtons()} title={this.props.modelDialogTitle}></Dialog>
+            </div>
         )
     }
 }
@@ -77,7 +79,7 @@ ModelDialog.proptypes = {
     modelProps: Proptypes.object,
     okButtonName: Proptypes.string,
     okButtonClick: Proptypes.func.isRequired,
-    dialogTitle: Proptypes.string,
+    modelDialogTitle: Proptypes.string,
     show: Proptypes.bool,
     stateChange: Proptypes.func.isRequired,
     onDialogClose: Proptypes.func,
@@ -90,7 +92,7 @@ ModelDialog.proptypes = {
 
 ModelDialog.defaultProps = {
     okButtonName: "Ok",
-    dialogTitle: '',
+    modelDialogTitle: '',
     show: false,
     additionalModelDialogButtons: [],
     showCancelButton: true,

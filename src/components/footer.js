@@ -45,7 +45,7 @@ class AppFooter extends Component {
     }
 
     closeTodoDialog = () => {
-        this.onChange({ 'modelDialogContentProps': null });
+        this.onChange({ 'modelDialogContentProps': null, modelDialogTitle: "" });
         this.modelProps = this.defaultModelProps();
     }
 
@@ -58,7 +58,8 @@ class AppFooter extends Component {
             modelDialogContentProps: {
                 ...this.getTodoModelDefaultprops()
             },
-            modelDialogContent: TodoModel
+            modelDialogContent: TodoModel,
+            modelDialogTitle: "Add Todo"
         }
         this.onChange(state)
     }

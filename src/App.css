@@ -93,3 +93,8 @@ html, body, #root {
     transform: rotate(360deg);
   }
 }
+
+.model-dialog .dialog-content {
+  min-height: 200px;
+  min-width: 300px;
+}

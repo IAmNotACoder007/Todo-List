@@ -10,7 +10,7 @@ import Slide from '@material-ui/core/Slide';
 class MaterialDialog extends Component {
     getDialogContent() {
         return (
-            <DialogContent>
+            <DialogContent className="dialog-content">
                 {this.props.content}
             </DialogContent>
         )
@@ -43,7 +43,7 @@ class MaterialDialog extends Component {
                 open={this.props.open}
                 aria-labelledby="form-dialog-title"
                 TransitionComponent={this.props.isAlertDialog ? Transition : undefined}
-
+                className={this.props.className}
             >
                 {this.getDialogTitle()}
                 {this.getDialogContent()}
@@ -69,13 +69,15 @@ MaterialDialog.propTypes = {
     title: PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.shape(buttonModel)).isRequired,
     open: PropTypes.bool,
-    isAlertDialog: PropTypes.bool
+    isAlertDialog: PropTypes.bool,
+    className: PropTypes.string
 }
 
 MaterialDialog.defaultProps = {
     title: "",
     open: false,
-    isAlertDialog: false
+    isAlertDialog: false,
+    className: ""
 }
 
 export default MaterialDialog;

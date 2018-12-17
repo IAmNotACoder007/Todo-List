@@ -59,7 +59,8 @@ class Todos extends Component {
                 this.props.editTodo(id, content.todoTextFromDialog, getFormattedDateString(content.dueDate || date), content.selectedListItem || listName)
             },
             modelDialogContentProps: modelDialogProps,
-            modelDialogContent: TodoModel
+            modelDialogContent: TodoModel,
+            modelDialogTitle: "Edit Todo"
         }
         this.props.stateChange(state)
     }

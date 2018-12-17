@@ -16,7 +16,8 @@ class GlobalItems extends Component {
                     okButtonClick={this.props.modelDialogOkClick}
                     okButtonName={this.props.okButtonName}
                     modelName={this.props.modelDialogContent}
-                    modelProps={this.props.modelDialogContentProps}>
+                    modelProps={this.props.modelDialogContentProps}
+                    modelDialogTitle={this.props.modelDialogTitle}>
                 </ModelDialog>
 
                 <ConfirmationDialog changeState={this.props.stateChange}

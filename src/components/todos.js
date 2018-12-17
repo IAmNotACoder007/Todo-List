@@ -152,7 +152,7 @@ class Todos extends Component {
             onConfirmation: onConfirmation,
             askConfimation: true,
             confirmationDialogTitle: "Finish Todo",
-            confirmationMessage: "Do you want to finish this Todo?",
+            confirmationMessage: "Do you want to finish this Task?",
             onConfirmationDialogClose: this.resetConfirmationDialog,
             onConfirmationCancel: () => {
                 onCancel();

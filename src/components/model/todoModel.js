@@ -38,7 +38,7 @@ class TodoModel extends Component {
     }
 }
 
-TodoModel.proptypes = {
+TodoModel.propTypes = {
     stateChanged: Proptypes.func.isRequired,
     todoTextError: Proptypes.bool,
     selectedListItem: Proptypes.string,

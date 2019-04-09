@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Checkbox from './common/checkbox';
 import TodoModel from './model/todoModel';
 import { getFormattedDateString, isTodaysDate, isTommorowsDate } from './helpers/dateUtils';
@@ -208,26 +208,26 @@ class Todos extends Component {
 }
 
 const todosInfo = {
-    id: Proptypes.string,
-    todoText: Proptypes.string,
-    completed: Proptypes.bool,
-    todoList: Proptypes.string,
-    dueDate: Proptypes.string,
-    todoTextFromDialog: Proptypes.string,
-    selectedListItem: Proptypes.string,
-    listItems: Proptypes.arrayOf(Proptypes.shape({
-        id: Proptypes.string,
-        name: Proptypes.string
+    id: PropTypes.string,
+    todoText: PropTypes.string,
+    completed: PropTypes.bool,
+    todoList: PropTypes.string,
+    dueDate: PropTypes.string,
+    todoTextFromDialog: PropTypes.string,
+    selectedListItem: PropTypes.string,
+    listItems: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string
     }))
 }
 
-Todos.proptypes = {
-    todoItems: Proptypes.arrayOf(Proptypes.shape(todosInfo)).isRequired,
-    finishTodo: Proptypes.func.isRequired,
-    editTodo: Proptypes.func.isRequired,
-    stateChange: Proptypes.func.isRequired,
-    modelDialogContentProps: Proptypes.Object,
-    modelDialogContent: Proptypes.element
+Todos.propTypes = {
+    todoItems: PropTypes.arrayOf(PropTypes.shape(todosInfo)).isRequired,
+    finishTodo: PropTypes.func.isRequired,
+    editTodo: PropTypes.func.isRequired,
+    stateChange: PropTypes.func.isRequired,
+    modelDialogContentProps: PropTypes.object,
+    modelDialogContent: PropTypes.element
 }
 
 

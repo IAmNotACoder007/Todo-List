@@ -49,7 +49,7 @@ class TextBox extends Component {
         )
     }
 }
-TextBox.proptypes = {
+TextBox.propTypes = {
     defaultValue: Proptypes.string,
     label: Proptypes.string,
     onChange: Proptypes.func.isRequired,

@@ -74,7 +74,7 @@ class ModelDialog extends Component {
     }
 }
 
-ModelDialog.proptypes = {
+ModelDialog.propTypes = {
     modelName: Proptypes.element.isRequired,
     modelProps: Proptypes.object,
     okButtonName: Proptypes.string,

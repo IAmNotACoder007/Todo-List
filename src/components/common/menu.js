@@ -28,7 +28,7 @@ class MaterialMenu extends Component {
     }
 }
 
-MaterialMenu.proptypes = {
+MaterialMenu.propTypes = {
     show: Proptypes.bool,
     showOn: Proptypes.node.isRequired,
     menuItems: Proptypes.arrayOf(Proptypes.shape({

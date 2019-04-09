@@ -75,7 +75,7 @@ class StringArrayEditor extends Component {
     }
 }
 
-StringArrayEditor.proptypes = {
+StringArrayEditor.propTypes = {
     entities: Proptypes.arrayOf(Proptypes.object),
     changeState: Proptypes.func,
     onDelete: Proptypes.func,

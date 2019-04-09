@@ -94,7 +94,7 @@ class AppFooter extends Component {
     }
 }
 
-AppFooter.proptypes = {
+AppFooter.propTypes = {
     todoTextFromQuickAdd: Proptypes.string,
     quickAddtodo: Proptypes.func.isRequired,
     onChange: Proptypes.func.isRequired,

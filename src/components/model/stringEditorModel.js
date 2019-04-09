@@ -46,7 +46,7 @@ class StringEditor extends Component {
     }
 }
 
-StringEditor.proptypes = {
+StringEditor.propTypes = {
     stringEditorTitle: Proptypes.string,
     openStringEditor: Proptypes.bool,
     stringEditorValueChange: Proptypes.func.isRequired,

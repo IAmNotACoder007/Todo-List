@@ -38,7 +38,7 @@ class CheckBox extends Component {
     }
 }
 
-CheckBox.proptypes = {
+CheckBox.propTypes = {
     checked: Proptypes.bool,
     value: Proptypes.string,
     onClick: Proptypes.func.isRequired
